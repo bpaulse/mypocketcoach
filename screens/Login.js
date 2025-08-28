@@ -1,10 +1,12 @@
 import React, { useState } from 'react';
 import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View, Link } from 'react-native';
+// import { StyleSheet, Text, View, Link } from 'react-native';
 
 import { Formik } from 'formik';
 
-import { Octicons, Ionicons, Fontisto } from '@expo/vector-icons';
+import MyTextInput from '../components/MyTextInput';
+
+// import { Octicons, Ionicons, Fontisto } from '@expo/vector-icons';
 
 import { 
 	StyledContainer, 
@@ -131,27 +133,6 @@ const Login = ({navigation}) => {
 			</InnerContainer>
 		</StyledContainer>
 	)	
-}
-
-const MyTextInput = ({label, icon, isPassword, hidePassword, setHidePassword, ...props}) => {
-	return (
-		<View>
-			<LeftIcon>
-				<Octicons name={icon} size={30} color={brand} />
-			</LeftIcon>
-
-			<StyledInputLabel>{label}</StyledInputLabel>
-
-			<StyledTextInput {...props} />
-
-			{ isPassword && (
-				<RightIcon onPress={() => setHidePassword(!hidePassword)}>
-					<Ionicons name={hidePassword ? 'eye-off' : 'eye'} size={30} color={darkLight} />
-				</RightIcon>
-			) }
-
-		</View>
-	);
 }
 
 export default Login
