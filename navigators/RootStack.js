@@ -8,6 +8,11 @@ import { createStackNavigator } from '@react-navigation/stack';
 import Login from '../screens/Login';
 import Signup from '../screens/Signup';
 import Welcome from '../screens/Welcome';
+import Landing from '../screens/Landing';
+import AppDescription from '../screens/AppDescription';
+import AppDescriptionMore from '../screens/AppDescriptionMore';
+import AppDescriptionFinal from '../screens/AppDescriptionFinal';
+import Confirmation from '../screens/Confirmation';
 
 const Stack = createStackNavigator();
 
@@ -26,10 +31,16 @@ const RootStack = () => {
 						paddingLeft: 20
 					},
 				}} 
-				initialRouteName="Login"
+				initialRouteName="Landing"
 			>
+
+				<Stack.Screen name="Landing" component={Landing} />
 				<Stack.Screen name="Login" component={Login} />
 				<Stack.Screen name="Signup" component={Signup} />
+				<Stack.Screen name="AppDescription" component={AppDescription} />
+				<Stack.Screen name="AppDescriptionMore" component={AppDescriptionMore} />
+				<Stack.Screen name="AppDescriptionFinal" component={AppDescriptionFinal} />
+				<Stack.Screen name="Confirmation" component={Confirmation} />
 				<Stack.Screen options={{ headerTintColor: primary }} name="Welcome" component={Welcome} />
 
 			</Stack.Navigator>

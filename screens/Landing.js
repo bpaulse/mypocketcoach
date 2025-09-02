@@ -1,9 +1,5 @@
 import React, { useState } from 'react';
 import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View, Link } from 'react-native';
-
-import { Formik } from 'formik';
-
 import { Octicons, Ionicons, Fontisto } from '@expo/vector-icons';
 
 import { 
@@ -28,8 +24,10 @@ import {
 	ExtraView,
 	TextLink,
 	TextLinkContent,
+	LandingPageText,
+	LandingPageImage,
 	WelcomeContainer,
-	LandingPageText
+	LandingPageContainer
 } from '../components/styles';
 
 // Colors object for consistent color usage
@@ -37,9 +35,7 @@ const { brand, darkLight, primary, secondary, black } = appColors;
 
 // Login component
 
-const Welcome = () => {
-
-	const [hidePassword, setHidePassword] = useState(true);
+const Landing = ({navigation}) => {
 
 	// This component will render the login screen
 	// It will include a welcome image, title, subtitle, and a form for email input
@@ -54,6 +50,7 @@ const Welcome = () => {
 
 	const handleSubmit = () => {
 		console.log('Form submitted');
+		navigation.navigate('Login');
 	}
 
 	const initialValues = { email: '', password: '' };
@@ -61,43 +58,41 @@ const Welcome = () => {
 	return (
 		<>
 			<StatusBar style="dark" />
-
 			<InnerContainer>
-				<PageTitle>Your Personal Mastery Journey</PageTitle>
+				
+				<PageTitle>Welcome to<br />My PocketCoach!</PageTitle>
+				
 				<LandingPageText>
-					We've curated this growth path based on your quiz results.
+					Unlock your personal mastery journey with expert coaching and guided growth.
 				</LandingPageText>
 
+				<LandingPageImage source={require('./../assets/welcome-page-img.png')} resizeMode="contain" />
 
-				<LandingPageText>
-					YOUR INFO WILL BE DISPLAYED HERE
-				</LandingPageText>
+				<LandingPageContainer>
+					<StyledFormArea>
 
+						<StyledButton onPress={handleSubmit}>
+							<ButtonText>Login</ButtonText>
+						</StyledButton>
+
+						<Line />
+
+						<ExtraView>
+							<ExtraText>Don't have an account? </ExtraText>
+							<TextLink onPress={() => navigation.navigate('AppDescription')}>
+								<TextLinkContent>Sign Up</TextLinkContent>
+							</TextLink>
+						</ExtraView>
+
+					</StyledFormArea>
+
+				</LandingPageContainer>
+
+				<PageLogo source={require('./../assets/iegroup-logo.png')} resizeMode="contain" />
 
 			</InnerContainer>
 		</>
 	)	
 }
 
-const MyTextInput = ({label, icon, isPassword, hidePassword, setHidePassword, ...props}) => {
-	return (
-		<View>
-			<LeftIcon>
-				<Octicons name={icon} size={30} color={brand} />
-			</LeftIcon>
-
-			<StyledInputLabel>{label}</StyledInputLabel>
-
-			<StyledTextInput {...props} />
-
-			{ isPassword && (
-				<RightIcon onPress={() => setHidePassword(!hidePassword)}>
-					<Ionicons name={hidePassword ? 'eye-off' : 'eye'} size={30} color={darkLight} />
-				</RightIcon>
-			) }
-
-		</View>
-	);
-}
-
-export default Welcome;
+export default Landing;

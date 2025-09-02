@@ -41,13 +41,13 @@ import {
 // Colors object for consistent color usage
 const { brand, darkLight, primary, secondary, black } = appColors;
 
-// Login component
+// Confirmation component
 
-const Login = ({navigation}) => {
+const Confirmation = ({navigation}) => {
 
 	const [hidePassword, setHidePassword] = useState(true);
 
-	// This component will render the login screen
+	// This component will render the Confirmation screen
 	// It will include a welcome image, title, subtitle, and a form for email input
 
 	const handleChange = (field) => (value) => {
@@ -63,7 +63,7 @@ const Login = ({navigation}) => {
 		navigation.navigate('Welcome');
 	}
 
-	const initialValues = { email: '', password: '' };
+	const initialValues = { confirmation: '' };
 
 	return (
 		<StyledContainer>
@@ -71,20 +71,20 @@ const Login = ({navigation}) => {
 				
 				<AddUserTitle>
 					<AddUserIcon>
-						<Ionicons name="add-circle" size={36} color="white" />
+						<Ionicons name="mail-unread-outline" size={36} color="white" />
 					</AddUserIcon>
 				</AddUserTitle>
 
 				<AppDescriptionHeaderText>
-					Your journey starts here
+					Check your inbox
 				</AppDescriptionHeaderText>
 
 				<AppDescriptionText>
-					Join thousands discovering their potential with My Pocket Coach
+					We've sent a confirmation link to your<br />email. Click it to activate your account.
 				</AppDescriptionText>
 
 				<Formik
-					initialValues={{ email: '', password: '' }}
+					initialValues={{ confirmation: '' }}
 					onSubmit={(values) => {
 						// console.log(values);
 						console.log('Form submitted 2');
@@ -94,48 +94,41 @@ const Login = ({navigation}) => {
 					{
 						(handleChange, handleBlur, handleSubmit3, values) => <StyledFormArea>
 							<MyTextInput
-								label="Email Address" 
-								icon="mail" 
-								placeholder="bevan@iegroup.com" 
+								label="Confirmation Code" 
+								icon="lock" 
+								placeholder="Email Confirnmation Link" 
 								placeholderTextColor={darkLight} 
 								// onChangeText={handleChange('email')} 
 								// onBlur={handleBlur('email')} 
-								// value={values.email} 
-								keyBoardType="email-address" 
+								// value={values.confirmation} 
+								keyBoardType="text" 
 							/>
 
-							<MyTextInput
-								label="Password" 
-								icon="lock" 
-								placeholder="*********" 
-								placeholderTextColor={darkLight} 
-								// onChangeText={handleChange('password')} 
-								// onBlur={handleBlur('password')} 
-								// value={values.email} 
-								secureTextEntry={hidePassword} 
-								isPassword={true}
-								keyBoardType="default" 
-								hidePassword={hidePassword} 
-								setHidePassword={setHidePassword}
-							/>
-							<MsgBox>...</MsgBox>
-
-							<StyledButton onPress={handleSubmit}>
-								<ButtonText>Login</ButtonText>
+							<StyledButton onPress={() => navigation.navigate('Welcome')}>
+								<ButtonText>Complete Registration</ButtonText>
 							</StyledButton>
 
-							<Line />
 
-							{/* <StyledButton google={true} onPress={handleSubmit}>
-								<Fontisto name="google" size={25} color={primary} />
-								<ButtonText google={true}>Sign Up with Google</ButtonText>
-							</StyledButton> */}
+							<StyledButton onPress={handleSubmit}>
+								<ButtonText><Ionicons name="send" size={24} color="white" /> Resend Email</ButtonText>
+							</StyledButton>
+
+							<br />
+							<br />
+
+
+							<TextLink onPress={() => navigation.navigate('Login')}>
+								<TextLinkContent>Back to Login</TextLinkContent>
+							</TextLink>
 
 							<ExtraView>
-								<ExtraText>Don't have an account? </ExtraText>
-								<TextLink onPress={() => navigation.navigate('Signup')}>
-									<TextLinkContent>Sign Up</TextLinkContent>
+								<ExtraText>Didn't receive the email? </ExtraText>
+								<TextLink>
+									<TextLinkContent>Check spam folder</TextLinkContent>
 								</TextLink>
+								{/* <TextLink>
+									<TextLinkContent>Contact Support</TextLinkContent>
+								</TextLink> */}
 							</ExtraView>
 
 						</StyledFormArea>
@@ -154,4 +147,4 @@ const Login = ({navigation}) => {
 	)	
 }
 
-export default Login
+export default Confirmation;

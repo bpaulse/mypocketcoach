@@ -1,9 +1,6 @@
-import { StyleSheet, Text, View, Link } from 'react-native';
-import React from 'react';
+import { View } from 'react-native';
 import { Octicons, Ionicons } from '@expo/vector-icons';
-
 import { appColors, LeftIcon, RightIcon, StyledInputLabel, StyledTextInput } from './styles';
-
 const { brand, darkLight, primary, secondary } = appColors;
 
 const MyTextInput = ({label, icon, isPassword, hidePassword, setHidePassword, ...props}) => {

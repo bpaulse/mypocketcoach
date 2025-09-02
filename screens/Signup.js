@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View, Link } from 'react-native';
+import { StyleSheet, Text, View, Link, TouchableOpacity } from 'react-native';
 
 import { Formik } from 'formik';
 
@@ -28,10 +28,14 @@ import {
 	ExtraView,
 	TextLink,
 	TextLinkContent,
+	AddUserTitle,
+	AddUserIcon,
+	AppDescriptionHeaderText,
+	AppDescriptionText
 } from '../components/styles';
 
 // Colors object for consistent color usage
-const { brand, darkLight, primary, secondary } = appColors;
+const { brand, darkLight, primary, secondary, black } = appColors;
 
 // Login component
 
@@ -52,7 +56,7 @@ const Signup = ({navigation}) => {
 
 	const handleSubmit = () => {
 		console.log('Form submitted');
-		// navigation.navigate('Welcome');
+		navigation.navigate('Confirmation');
 	}
 
 	const initialValues = { email: '', password: '' };
@@ -60,16 +64,23 @@ const Signup = ({navigation}) => {
 	return (
 		<StyledContainer>
 			<InnerContainer>
-				{/* <StatusBar style="dark" /> */}
-				<WelcomeImage source={require('./../assets/welcome-page-img.png')} resizeMode="contain" />
-				<PageTitle>Welcome to My PocketCoach!</PageTitle>
 
-				<SubTitle>Account Sign Up</SubTitle>
+				<AddUserTitle>
+					<AddUserIcon>
+						<Ionicons name="add-circle" size={36} color="white" />
+					</AddUserIcon>
+				</AddUserTitle>
 
-				{/* <Link>Sign Up -{'>'} </Link> */}
+				<AppDescriptionHeaderText>
+					Your journey starts here
+				</AppDescriptionHeaderText>
+
+				<AppDescriptionText>
+					Join thousands discovering their potential with My Pocket Coach
+				</AppDescriptionText>
 
 				<Formik
-					initialValues={{ fullName: '', dateOfBirth: '', email: '', password: '', confirmPassword: '' }}
+					initialValues={{ fullName: '', email: '', password: '' }}
 					
 					onSubmit={(values) => {
 						console.log(values);
@@ -77,7 +88,7 @@ const Signup = ({navigation}) => {
 					}}
 				>
 					{
-						(handleChange, handleBlur, handleSubmit, values) => <StyledFormArea>
+						(handleChange, handleBlur, handleSubmit3, values) => <StyledFormArea>
 
 							<MyTextInput
 								label="Full Name" 
@@ -101,16 +112,6 @@ const Signup = ({navigation}) => {
 							/>
 
 							<MyTextInput
-								label="Date of Birth" 
-								icon="calendar" 
-								placeholder="YYYY-MM-DD" 
-								placeholderTextColor={darkLight} 
-								// onChangeText={handleChange('dateOfBirth')} 
-								// onBlur={handleBlur('dateOfBirth')} 
-								// value={values.dateOfBirth} 
-							/>
-
-							<MyTextInput
 								label="Password" 
 								icon="lock" 
 								placeholder="*********" 
@@ -125,7 +126,7 @@ const Signup = ({navigation}) => {
 								setHidePassword={setHidePassword}
 							/>
 
-							<MyTextInput
+							{/* <MyTextInput
 								label="Confirm Password" 
 								icon="lock" 
 								placeholder="*********" 
@@ -138,7 +139,7 @@ const Signup = ({navigation}) => {
 								keyBoardType="default" 
 								hidePassword={hidePassword} 
 								setHidePassword={setHidePassword}
-							/>
+							/> */}
 							<MsgBox>...</MsgBox>
 
 							<StyledButton onPress={handleSubmit}>
@@ -158,8 +159,10 @@ const Signup = ({navigation}) => {
 					}
 				</Formik>
 
-				<PageLogo source={require('./../assets/iegroup-logo.png')} resizeMode="contain" />
-				{/* Additional components like TextInput, Button, etc. can be added here */}
+				<TouchableOpacity onPress={() => navigation.navigate('Landing')}>
+					<PageLogo source={require('./../assets/iegroup-logo.png')} resizeMode="contain" />
+				</TouchableOpacity>
+				
 
 			</InnerContainer>
 		</StyledContainer>
